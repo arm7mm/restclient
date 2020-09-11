@@ -1,1 +1,1 @@
-"systemInfo"{"id":0, "jsonrpc":"2.0","method":"systemInfo","params":[null, false, true, []]}
+"methodname"{"a":"b", "d":[[]],"r":{"tt" : []},"p":[null, false, true, []]}

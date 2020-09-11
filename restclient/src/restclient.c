@@ -498,9 +498,9 @@ int main() {
 
                 post.params.s    = (char *)ptr;
                 post.params.size = in.readpos;
-                free(in.buf);             /* Освобождение входного буфера */    
+ 
                 action(&post, &recv);
-
+                free(in.buf);             /* Освобождение входного буфера */   
                 exit(EXIT_SUCCESS);
             } else {
                fprintf(stderr, "Method parameters is not json type.\n");
