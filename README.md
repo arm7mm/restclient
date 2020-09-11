@@ -20,9 +20,11 @@ Simple rest client
                                 Сборка программы.
 
 Сборка может быть осуществлена путём выполнения 
+
               ./build.sh 
                  или 
 clang -std=c99 src/strcmpr.c src/stack.c src/url.c src/jsonutf.c src/restclient.c -o restclient
+
                  или 
 gcc -std=c99 src/strcmpr.c src/stack.c src/url.c src/jsonutf.c src/restclient.c -o restclient
 
