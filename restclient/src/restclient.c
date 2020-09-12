@@ -132,7 +132,9 @@ static result_t msgsend(int psfd, msgset_t * msgs) {
             char * ps = msg;                  
 
             bcopy(post0, ps, sizeof(post0) - 1);              ps += sizeof(post0) - 1;
-            bcopy(msgs->urlw.s, ps, msgs->urlw.size);         ps += msgs->urlw.size;
+            if (msgs->urlw.s != NULL) {
+                bcopy(msgs->urlw.s, ps, msgs->urlw.size);         ps += msgs->urlw.size;
+            }
             bcopy(post1, ps, sizeof(post1) - 1);              ps += sizeof(post1) - 1;
             bcopy(msgs->hostname.s, ps, msgs->hostname.size); ps += msgs->hostname.size;
             bcopy(post2, ps, sizeof(post2) - 1);              ps += sizeof(post2) - 1;
@@ -143,7 +145,8 @@ static result_t msgsend(int psfd, msgset_t * msgs) {
             bcopy(msgs->method.s, ps, msgs->method.size);     ps += msgs->method.size;
             bcopy(post5, ps, sizeof(post5) - 1);              ps += sizeof(post5) - 1;
             bcopy(msgs->params.s, ps, msgs->params.size);     ps += msgs->params.size;
-            bcopy(post6, ps, sizeof(post6) - 1);              ps += (sizeof(post6) - 1);            
+            bcopy(post6, ps, sizeof(post6) - 1);
+          
             if (write(psfd, msg, size) != -1) {
                 printf("Send POST message success.\n");
                 free(msg);

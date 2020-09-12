@@ -11,7 +11,7 @@
 
 result_t geturl(char * url, size_t size, location_t * loc) {
     typedef enum { URL_SCHEME = 0, URL_USERINFO = 1, URL_HOSTNAME = 2, 
-                   URL_PORT = 3, URL_PATH = 4, URL_QUERY = 5, URL_FRAGMENT = 6, URL_ERROR } urlstate_t;
+                   URL_PORT = 3, URL_PATH = 4, URL_QUERY = 5, URL_FRAGMENT = 6, URL_WS = 7, URL_ERROR } urlstate_t;
 
     if (url != NULL && loc != NULL && size) {
         char * u = url;
@@ -33,7 +33,8 @@ result_t geturl(char * url, size_t size, location_t * loc) {
             unsigned int nport = 0;
             size_t len = 0; 
             size_t portlen = 0; 
-            while (sz && *u && state != URL_FRAGMENT && state != URL_ERROR) {
+            while (sz && *u && state != URL_FRAGMENT && state != URL_ERROR &&
+                  (state != URL_WS ||  *u == ' ')) {
                 if (len == 1 && state == URL_HOSTNAME) {
                     hostname = u;
                 }
@@ -97,7 +98,7 @@ result_t geturl(char * url, size_t size, location_t * loc) {
                         state = URL_FRAGMENT;
                     default:
                         if (state == URL_PORT) {
-                            state = URL_ERROR;
+                            state = (*u == ' ') ? URL_WS : URL_ERROR;
                         } 
                         break;
                 }
