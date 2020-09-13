@@ -32,4 +32,4 @@ gcc -std=c99 src/strcmpr.c src/stack.c src/url.c src/jsonutf.c src/restclient.c 
                                 Запуск
 ./restclient
 
-(linux x86_64, clang++ 7.0.1)
+(linux x86_64, clang 7.0.1)
